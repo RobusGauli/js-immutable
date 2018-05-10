@@ -1,15 +1,11 @@
 {
   "private": true,
-  "name": "babel-starter-kit",
+  "name": "react-state-reducer",
   "version": "0.0.0",
-  "description": "A project template for authoring and publishing JavaScript libraries",
-  "homepage": "https://www.kriasoft.com/babel-starter-kit/",
-  "repository": "kriasoft/babel-starter-kit",
-  "author": "Kriasoft <hello@kriasoft.com> (https://www.kriasoft.com)",
-  "contributors": [
-    "Konstantin Tarkus <hello@tarkus.me>",
-    "Vladimir Kutepov <frenzzy.man@gmail.com>"
-  ],
+  "description": "A query style state management for react.",
+  "repository": "robusgauli/react-state-reducer",
+  "author": "Robus <robusgauli@gmail.com> (https://www.robusgauil.io)",
+  "contributors": [],
   "license": "MIT",
   "keywords": [],
   "main": "index.js",
@@ -41,6 +37,7 @@
     "chai": "^4.0.0-canary.1",
     "coveralls": "^2.11.14",
     "del": "^2.2.2",
+    "easystatic": "^0.1.12",
     "eslint": "^3.8.0",
     "eslint-config-airbnb-base": "^10.0.1",
     "eslint-plugin-import": "^2.2.0",
@@ -58,7 +55,7 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "build": "node tools/build",
     "prepublish": "npm run build",
-    "publish:docs": "easystatic deploy docs --repo kriasoft/babel-starter-kit",
+    "publish:docs": "easystatic deploy docs --repo robusgauli/react-state-reducer",
     "start": "easystatic start docs"
   }
 }
