@@ -49,7 +49,20 @@
 
 function reduce(selector) {
   function set(oldValue, newValue) {
+    if (newValue === null || newValue === undefined) {
+      return oldValue;
+    }
     return newValue;
+  }
+
+  function extend(oldArray, newArray) {
+    if (!Array.isArray(newArray) || !Array.isArray(oldArray)) {
+      return oldArray;
+    }
+    if (newArray.length) {
+      return oldArray.concat(newArray);
+    }
+    return oldArray;
   }
 
   function append(oldList, value) {
@@ -63,75 +76,94 @@ function reduce(selector) {
     }
     return oldList.concat(value);
   }
+
+  function merge(oldObject, newObject) {
+    if (
+      newObject === null ||
+      newObject === undefined ||
+      typeof newObject !== 'object'
+    ) {
+      return oldObject;
+    }
+    if (typeof newObject === 'object' && !Object.keys(newObject).length) {
+      return oldObject;
+    }
+    return Object.assign({}, oldObject, newObject);
+  }
+
+  function deleteOp(oldObject, key) {
+    if (Array.isArray(oldObject)) {
+      return oldObject.filter((val, index) => key !== index);
+    }
+    if (typeof oldObject === 'object' && oldObject !== null) {
+      return Object.keys(oldObject)
+        .reduce((acc, k) => (k === key)
+           ? { ...acc }
+           : { ...acc, [k]: oldObject[k]}, {});
+    }
+    return oldObject;
+  }
+
   const operationalMapper = {
     set,
     append,
+    merge,
+    extend,
+    delete: deleteOp,
   };
+
   let toUpdate = {};
   return new (class {
-    set(value) {
-      if (typeof value === 'object' && value !== null) {
-        const updatedObject = Object.keys(value)
-          .reduce((acc, key) => ({ ...acc,
-            [key]: {
-              operation: 'set',
-              value: value[key],
-            } }), {});
-        toUpdate = {
-          ...toUpdate,
-          ...updatedObject,
-        };
-      } else if (typeof value === 'string') {
-        toUpdate = {
-          toUpdate,
-          default: {
-            operation: 'set',
-            value,
-          },
-        };
-      }
-      return this;
+    constructor() {
+      this.set = this.operationFactory('set');
+      this.merge = this.operationFactory('merge');
+      this.delete = this.operationFactory('delete');
+      this.append = this.operationFactory('append');
+      this.extend = this.operationFactory('extend');
+      this.setMany = this.operationFactory('set', true);
+      this.mergeMany = this.operationFactory('merge', true);
+      this.appendMany = this.operationFactory('append', true);
+      this.extendMany = this.operationFactory('extend', true);
+      this.deleteMany = this.operationFactory('delete', true);
     }
 
-    append(value) {
-      if (
-        typeof value === 'object' &&
-        value !== null
-      ) {
-        const updatedObject = Object.keys(value)
-          .reduce((acc, key) => ({ ...acc,
-            [key]: {
-              operation: 'append',
-              value: value[key],
-            } }), {});
-
-        toUpdate = {
-          ...toUpdate,
-          ...updatedObject,
-        };
-      } else {
-        toUpdate = {
-          ...toUpdate,
-          default: {
-            operation: 'append',
-            value,
-          },
-        };
-      }
-      return this;
+    operationFactory(operationName, many) {
+      return function wrapper(value) {
+        if (many) {
+          const updatedObject = Object.keys(value)
+            .reduce((acc, key) => ({ ...acc,
+              [key]: {
+                operation: operationName,
+                value: value[key],
+              } }), {});
+          toUpdate = {
+            ...toUpdate,
+            ...updatedObject,
+          };
+        } else if (value !== undefined || value !== null) {
+          toUpdate = {
+            toUpdate,
+            default: {
+              operation: operationName,
+              value,
+            },
+          };
+        }
+        return this;
+      }.bind(this);
     }
 
     selectTransform(originalObject, selectorObject) {
       if (
-        typeof selector === 'string' &&
-        selector.includes('#')
+        typeof selectorObject === 'string' &&
+        selectorObject.includes('#')
       ) {
         // we reached to the target
         if (!Object.keys(toUpdate).length) {
           throw new Error('Should at least has a one operation intended before applying changes');
         }
 
-        if (selector === '#') {
+        if (selectorObject === '#') {
           if (Object.keys(toUpdate).indexOf('default') !== -1) {
             const updater = toUpdate.default;
             return operationalMapper[updater.operation](originalObject, updater.value);
@@ -142,7 +174,7 @@ function reduce(selector) {
 
       const clonedObject = Object.assign({}, originalObject);
 
-      Object.keys(selector)
+      Object.keys(selectorObject)
         .forEach((key) => {
           const keyedObject = clonedObject[key];
           const filteredObject = selectorObject[key];
@@ -161,3 +193,4 @@ function reduce(selector) {
 }
 
 module.exports = reduce;
+
