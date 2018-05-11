@@ -56,7 +56,8 @@ function reduce(selector) {
     throw new Error('Invalid selector');
   }
 
-  if (!Object.keys(selector).length) {
+  if (!Object.keys(selector)
+    .length) {
     throw new Error('Invalid selector. No keys to traverse.');
   }
   return function selectorWrapper(_originalObject) {
@@ -78,12 +79,12 @@ function reduce(selector) {
     }
 
     function append(oldList, value) {
-    // if value is null or undefined return the same original list
+      // if value is null or undefined return the same original list
       if (
-      value === undefined ||
-      value === null ||
-      !Array.isArray(oldList)
-    ) {
+        value === undefined ||
+        value === null ||
+        !Array.isArray(oldList)
+      ) {
         return oldList;
       }
       return oldList.concat(value);
@@ -91,28 +92,33 @@ function reduce(selector) {
 
     function merge(oldObject, newObject) {
       if (
-      newObject === null ||
-      newObject === undefined ||
-      typeof newObject !== 'object'
-    ) {
+        newObject === null ||
+        newObject === undefined ||
+        typeof newObject !== 'object'
+      ) {
         return oldObject;
       }
-      if (typeof newObject === 'object' && !Object.keys(newObject).length) {
+      if (typeof newObject === 'object' && !Object.keys(newObject)
+        .length) {
         return oldObject;
       }
       return Object.assign({}, oldObject, newObject);
     }
 
-  // delete being the builtin operator
+    // delete being the builtin operator
     function deleteOp(oldObject, key) {
+      if (
+        key === null ||
+        key === undefined
+      ) {
+        return oldObject;
+      }
       if (Array.isArray(oldObject)) {
         return oldObject.filter((val, index) => key !== index);
       }
       if (typeof oldObject === 'object' && oldObject !== null) {
         return Object.keys(oldObject)
-        .reduce((acc, k) => (k === key)
-           ? { ...acc }
-           : { ...acc, [k]: oldObject[k] }, {});
+          .reduce((acc, k) => (k === key) ? { ...acc } : { ...acc, [k]: oldObject[k] }, {});
       }
       return oldObject;
     }
@@ -142,9 +148,9 @@ function reduce(selector) {
           return this;
         }
         if (
-        typeof target === 'string' &&
-        target.startsWith('#')
-      ) {
+          typeof target === 'string' &&
+          target.startsWith('#')
+        ) {
           targetPointer = target;
         }
         return this;
@@ -177,7 +183,7 @@ function reduce(selector) {
           typeof selectorObject === 'string' &&
           selectorObject.startsWith('#')
         ) {
-        // we reached to the target
+          // we reached to the target
           const updateKeys = Object.keys(toUpdate);
 
           if (!updateKeys.length) {
@@ -193,9 +199,9 @@ function reduce(selector) {
           } else if (updateKeys.indexOf(selectorObject) !== -1) {
             const updater = toUpdate[selectorObject];
             return operationalMapper[updater.operation](
-            originalObject,
-            updater.value,
-          );
+              originalObject,
+              updater.value,
+            );
           }
           return originalObject;
         }
@@ -221,9 +227,8 @@ function reduce(selector) {
         return this.selectTransform(_originalObject, selector);
       }
 
-  })();
+    })();
   };
 }
 
 module.exports = reduce;
-

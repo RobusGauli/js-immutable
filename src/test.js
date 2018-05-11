@@ -21,20 +21,20 @@ function main() {
     },
   });
 
-  const result = addressReducer(person)
+  const result = addressReducer
     .of('#')
     .set('new value for permanent')
     .of('#1')
     .set(7)
     .apply();
 
-  const resultOne = addressReducer(person)
-    .of('#')
-    .set('love is in the air')
-    .apply();
-  console.log(result);
-  console.log(resultOne);
-  console.log(person);
+  // const resultOne = addressReducer(person)
+  //   .of('#')
+  //   .set('love is in the air')
+  //   .apply();
+  // console.log(result);
+  // console.log(resultOne);
+  // console.log(person);
 
   // console.log(result.detail.address.permanent);
   // console.log(person.detail.address.permanent);
