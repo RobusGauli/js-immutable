@@ -4,25 +4,40 @@ function main() {
   const person = {
     detail: {
       address: {
-        permanent: [3, 4, 6, 7],
+        permanent: { hi: 'there', hola: 'hloa' },
         temporary: 'pokhara',
       },
     },
+    phone: 3,
   };
 
   const addressReducer = reduce({
     detail: {
       address: {
         permanent: '#',
+        temporary: '#1',
       },
+
     },
   });
 
-  const result = addressReducer
-    .delete(2)
-    .apply(person);
-  // console.log(result.);
-  console.log(result.detail.address.permanent);
+  const result = addressReducer(person)
+    .of('#')
+    .set('new value for permanent')
+    .of('#1')
+    .set(7)
+    .apply();
+
+  const resultOne = addressReducer(person)
+    .of('#')
+    .set('love is in the air')
+    .apply();
+  console.log(result);
+  console.log(resultOne);
+  console.log(person);
+
+  // console.log(result.detail.address.permanent);
+  // console.log(person.detail.address.permanent);
 }
 
 main();
