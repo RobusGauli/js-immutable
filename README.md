@@ -59,7 +59,7 @@ constrain(view1, view2) { view1, view2 in
 }
 ```
 
-<img src="/images/pirates1.png" align="left" height="220px" hspace="20px" vspace="10px">
+<img src="https://github.com/robb/Cartography/blob/master/images/pirates2.png" align="left" height="220px" hspace="20px" vspace="10px">
 
 For every view on the left hand side of an equality or inequality operator,
 Cartography will automatically set its
@@ -117,7 +117,7 @@ let group = constrain(button) { button in
 
 Cartography supports all built-in attributes as of iOS 8 and OS X 10.9, those are:
 
-<img src="/images/pirates3.png" align="right" height="400px" hspace="20px" vspace="100px">
+<img src="https://github.com/robb/Cartography/blob/master/images/pirates3.png" align="right" height="400px" hspace="20px" vspace="100px">
 
 - `width`
 - `height`
