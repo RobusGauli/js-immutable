@@ -266,5 +266,20 @@ describe('React State Reducer', () => {
         .deep
         .equal(originalState);
     });
+
+    it('should delete a value in an index when deleting in an array', () => {
+      const selector = {
+        detail: {
+          friends: '#',
+        },
+      };
+      const reducer = reduce(selector);
+      const result = reducer(originalState)
+        .delete(1)
+        .apply();
+      expect(result.detail.friends)
+        .deep
+        .equal(['Robus', 'Ishan']);
+    });
   });
 });
