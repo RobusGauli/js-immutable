@@ -13,7 +13,7 @@ Using Cartography, you can set up your Auto Layout constraints in declarative co
 
 In short, it allows you to replace this:
 
-<img src="/images/pirates2.png" align="right" height="280px" hspace="30px" vspace="30px">
+<img src="https://raw.githubusercontent.com/robb/Cartography/master/images/pirates1.png" align="right" height="280px" hspace="30px" vspace="30px">
 
 ```Swift
 addConstraint(NSLayoutConstraint(
