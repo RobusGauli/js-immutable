@@ -1,11 +1,9 @@
 
-# React State Reducer 🐬🐬
-
-
 <a href="https://travis-ci.org/RobusGauli/react-state-reducer">
     <img src="https://travis-ci.org/RobusGauli/react-state-reducer.svg?branch=master" hspace="10px" align="right" vspace="2px">
 </a>
 
+# React State Reducer 🐬🐬
 
 React State Reducer provides you beautiful api for managing state change. The three most important benefits are
 > a. It hides the internal structure of your redux state from your reducer.
