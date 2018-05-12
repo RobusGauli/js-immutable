@@ -8,7 +8,8 @@
   "contributors": [],
   "license": "MIT",
   "keywords": [],
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
   "jsnext:main": "index.es.js",
   "babel": {
     "presets": [
