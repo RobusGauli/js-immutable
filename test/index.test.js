@@ -76,7 +76,9 @@ describe('React State Reducer', () => {
         .set('some new value')
         .apply();
       expect(originalState)
-        .deep.equal(newState);
+        .deep
+        .equal(newState);
+
     });
 
     it('should return the new value when applying set to the valid selector', () => {
