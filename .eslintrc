@@ -4,6 +4,8 @@
   },
   "rules": {
     "no-underscore-dangle": "off",
+    "no-confusing-arrow": "off",
+    "no-restricted-syntax": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
