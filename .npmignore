@@ -1,0 +1,16 @@
+src
+test
+tsconfig.json
+.eslintrc
+.editorconfig
+tools
+tsconfig.module.json
+tslint.json
+.travis.yml
+.github
+.prettierignore
+build/docs
+**/*.spec.*
+coverage
+.nyc_output
+*.log
