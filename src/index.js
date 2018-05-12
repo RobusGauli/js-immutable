@@ -118,7 +118,7 @@ function reduce(selector) {
       }
       if (typeof oldObject === 'object' && oldObject !== null) {
         return Object.keys(oldObject)
-          .reduce((acc, k) => (k === key) ? { ...acc } : { ...acc, [k]: oldObject[k] }, {});
+          .reduce((acc, k) => (k === key) ? {...acc } : {...acc, [k]: oldObject[k] }, {});
       }
       return oldObject;
     }
@@ -134,7 +134,7 @@ function reduce(selector) {
     let toUpdate = {};
     let targetPointer = '#';
 
-    return new (class {
+    return new(class {
       constructor() {
         this.set = this.operationFactory('set');
         this.merge = this.operationFactory('merge');
@@ -198,10 +198,7 @@ function reduce(selector) {
             return originalObject;
           } else if (updateKeys.indexOf(selectorObject) !== -1) {
             const updater = toUpdate[selectorObject];
-            return operationalMapper[updater.operation](
-              originalObject,
-              updater.value,
-            );
+            return operationalMapper[updater.operation](originalObject, updater.value);
           }
           return originalObject;
         }
@@ -215,10 +212,7 @@ function reduce(selector) {
             break;
           }
           const filteredObject = selectorObject[key];
-          clonedObject[key] = this.selectTransform(
-            keyedObject,
-            filteredObject,
-          );
+          clonedObject[key] = this.selectTransform(keyedObject, filteredObject);
         }
         return clonedObject;
       }
@@ -231,4 +225,4 @@ function reduce(selector) {
   };
 }
 
-module.exports = reduce;
+export default reduce;
