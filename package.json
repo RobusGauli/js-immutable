@@ -1,7 +1,7 @@
 {
   "private": false,
   "name": "js-immutable",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A selector based modern immutable helper for Javascript",
   "repository": "robusgauli/js-immutable",
   "author": "Robus <robusgauli@gmail.com> (https://www.robusgauil.github..io)",
