@@ -2,7 +2,7 @@
 # React State Reducer 🐬🐬
 
 
-<a href="https://travis-ci.org/robb/Cartography?branch=master">
+<a href=https://travis-ci.org/RobusGauli/react-state-reducer.svg?branch=master">
     <img src="https://travis-ci.org/RobusGauli/react-state-reducer.svg?branch=master" hspace="10px" align="right" vspace="2px">
 </a>
 
