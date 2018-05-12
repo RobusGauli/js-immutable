@@ -3,9 +3,9 @@
     <img src="https://travis-ci.org/RobusGauli/react-state-reducer.svg?branch=master" hspace="10px" align="right" vspace="2px">
 </a>
 
-# React State Reducer 🐬🐬
+# JS Immutable 🐬🐬
 
-React State Reducer provides you beautiful api for managing state change. The three most important benefits are
+JS Immutable provides you beautiful api for managing state change. The three most important benefits are
 > a. It hides the internal structure of your redux state from your reducer.
 > b. It prevents you from accidentally modifying your deeply nested redux state.
 > c. It tries to share the structure as much as possible when you change state, and won't modify your original state during transformation.  
@@ -15,7 +15,7 @@ React State Reducer provides you beautiful api for managing state change. The th
 
 
 ```javascript
-import reduce from 'react-state-reducer';
+import reduce from 'js-immutable';
 ```
 
 ```javascript
