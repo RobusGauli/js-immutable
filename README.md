@@ -9,14 +9,14 @@
 
 ## Motivation 🐬🐬
 Consider the scenario where you have to set a new value to <b>"temporary"</b> field without mutating original state.
-```javacript
+```javascript
 const state = {
   name: 'Safal',
   age: 45,
   friends: [],
   detail: {
    	personal: {
-      fatherName: 'Kapil'
+      fatherName: 'Kapil',
     	address: {
 				permanent: 'Kathmandu',
         temporary: 'Pokhara'
@@ -31,18 +31,18 @@ Javascript way of setting a new value without modifying original state would be 
 // For my brain, this is too much to wrap around just to change a single field.
 // There must be some better way. 
 const newState = {
-	...state
-    detail: {
-    	...state.detail
-        personal: {
-        	...state.detail.personal
-            address: {
-            	...state.detail.personal.address,
-                temporary: 'New Random Location' // here is the actual change
-            }
-        }
+  ...state,
+  detail: {
+    ...state.detail,
+    personal: {
+      ...state.detail.personal,
+      address: {
+        ...state.detail.personal.address,
+        temporary: 'New Random Location' // here is the actual change
+      }
     }
-}  
+  }
+} 
 ```
 
 ### Problems with the above code:
@@ -64,14 +64,15 @@ import reduce from 'js-immutable';
 ```
 ```javascript
 // create a address reducer by passing a selector
+
 const addressReducer = reduce({
-	detail: {
-    	personal: {
-        	address: {
-            	temporary: '#',
-            }
-        }
+  detail: {
+    personal: {
+      address: {
+        temporary: '#',
+      }
     }
+  }
 })
 ```
 
@@ -81,31 +82,31 @@ const addressReducer = reduce({
 // No dependency to the state structure while returning new state
 
 const newState = addressReducer(state)
-										.set('New Random Location')
-                    .apply();
+  .set('New Random Location')
+  .apply();
 ```
 A more complex scenario where we need to append new friend to the friends list and set new value to permanent address.
 
 ```javascript
 
 const complexReducer = reduce({
-	detail: {
-    	friends: '#friends'  // selector
-        personal: {
-        	address: {
-            	permanent: '#permanent' // selector 
-            }
-        }
-	}
+  detail: {
+    friends: '#friends', // selector
+    personal: {
+      address: {
+        permanent: '#permanent' // selector 
+      }
+    }
+  }
 });
 
 // Clean and elegant 
 const newState = complexReducer(state)
-										.of('#friends') // using friends selector and appending
-                    .append('John')  
-                    .of('#permanent') // using permanent selector and setting
-                    .set("New Value') 
-                    .apply();
+  .of('#friends') // using friends selector and appending
+  .append('John')
+  .of('#permanent') // using permanent selector and setting
+  .set('New Value')
+  .apply();
  ```
 ### Note
  ###### '#' is the default selector. You don't need to use "of("some selector")' when you use '#' as a selector.
