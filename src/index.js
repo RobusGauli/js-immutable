@@ -61,6 +61,17 @@ function reduce(selector) {
     throw new Error('Invalid selector. No keys to traverse.');
   }
   return function selectorWrapper(_originalObject) {
+
+    function coroutine(coroutineFunction) {
+      return function wrapper(...args) {
+        // launch the coroutine
+        const coro = coroutineFunction(...args);
+        // drive it to the first yield
+        coro.next();
+        return coro;
+      }
+    }
+
     function set(oldValue, newValue) {
       if (newValue === null || newValue === undefined) {
         return oldValue;
@@ -134,6 +145,31 @@ function reduce(selector) {
     let toUpdate = {};
     let targetPointer = '#';
 
+    function* toUpdateCoro() {
+      while (true) {
+
+        const { updatePayload, pointer } = yield;
+
+        if (pointer === '#') {
+          toUpdate = {
+            ...toUpdate,
+            default: updatePayload
+          }
+        } else if (
+          pointer.startsWith('#') &&
+          pointer.length > 1
+        ) {
+          toUpdate = {
+            ...toUpdate,
+            [pointer]: updatePayload
+          }
+        }
+      }
+    }
+
+    // drive the coroutine to the first yield
+    const updateCoroutine = coroutine(toUpdateCoro)();
+
     return new(class {
       constructor() {
         this.set = this.operationFactory('set');
@@ -149,7 +185,8 @@ function reduce(selector) {
         }
         if (
           typeof target === 'string' &&
-          target.startsWith('#')
+          target.startsWith('#') &&
+          target.length > 1
         ) {
           targetPointer = target;
         }
@@ -157,22 +194,14 @@ function reduce(selector) {
       }
       operationFactory(operationName) {
         return function wrapper(value) {
-          if (targetPointer !== '#') {
-            toUpdate = {
-              ...toUpdate,
-              [targetPointer]: {
+          if (value !== undefined || value !== null) {
+            updateCoroutine.next({
+              updatePayload: {
                 value,
                 operation: operationName,
               },
-            };
-          } else if ((value !== undefined || value !== null) && targetPointer === '#') {
-            toUpdate = {
-              ...toUpdate,
-              default: {
-                value,
-                operation: operationName,
-              },
-            };
+              pointer: targetPointer,
+            })
           }
           return this;
         }.bind(this);
@@ -208,6 +237,7 @@ function reduce(selector) {
         for (const key of Object.keys(selectorObject)) {
           const keyedObject = clonedObject[key];
           if (keyedObject === undefined || keyedObject === null) {
+            // return back the original state and the copied
             clonedObject = originalObject;
             break;
           }
