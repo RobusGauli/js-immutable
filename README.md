@@ -16,11 +16,10 @@ const state = {
   friends: [],
   detail: {
    	personal: {
-      fatherName: 'Kapil',
     	address: {
-				permanent: 'Kathmandu',
-        temporary: 'Pokhara'
-      },
+        temporary: 'Pokhara',
+				permanent: 'Kathmandu'
+      }
     }
   }
 }           
