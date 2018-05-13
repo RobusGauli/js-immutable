@@ -7,13 +7,51 @@
     <img src="https://travis-ci.org/RobusGauli/react-state-reducer.svg?branch=master" hspace="10px" align="right" vspace="2px">
 </a>
 
-# JS Immutable 🐬🐬
+## Motivation 🐬🐬
+Consider the scenario where you have to set a new value to <b>"temporary"</b> field without mutating original state.
+```javacript
+const state = {
+   name: 'Safal',
+   age: 45,
+   detail: {
+   		personal: {
+    		address: {
+				permanent: 'Kathmandu',
+        		temporary: 'Pokhara'
+        	},
+            fatherName: 'Kapil'
+        }
+    }
+}              
+```
+Javascript way of setting a new value without modifying original state would be something like this: 
 
-JS Immutable provides you beautiful api for managing state change. The three most important benefits are
-> a. It hides the internal structure of your redux state from your reducer.
-> b. It prevents you from accidentally modifying your deeply nested redux state.
-> c. It tries to share the structure as much as possible when you change state, and won't modify your original state during transformation.  
+```javascript
+// For my brain, this is too much to wrap around just to change a single field.
+// There must be some better way. 
+const newState = {
+	...state
+    detail: {
+    	...state.detail
+        personal: {
+        	...state.detail.personal
+            address: {
+            	...state.detail.personal.address,
+                temporary: 'New Random Location' // here is the actual change
+            }
+        }
+    }
+}  
+```
 
+### Problems with the above code:
+:pushpin: <span >Need to <b>keep track</b> of whole state tree just to perform such small modification.</span>
+ 
+ :pushpin: <span>Need to make sure that state tree is not <b>mutated</b> while returning new state.</span>
+ 
+ :pushpin: Need to make sure <b>structure</b> of state tree is not changed while returning new state. Specially it becomes nightmare in real world application where you don't know which action modified the entire redux state.
+
+:pushpin: If structure of original state tree is modified, then every action reducer must be re-written. i.e Your reducer has an <b>dependency</b> on structure of redux state.
 ## Usage
 
 
