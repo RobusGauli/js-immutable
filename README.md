@@ -16,8 +16,10 @@ const state = {
     friends: ['Roshan'],
     personal: {
       address: {
-        permanent: 'Kathmandu'
-      }
+        permanent: 'Kathmandu',
+        temporary; 'Pokhara'
+      },
+      spouse: 'Nancy'
     }
   }
 }          
