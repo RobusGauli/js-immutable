@@ -12,7 +12,7 @@
  *
  * ### Example (es module)
  * ```js
- * import reduce from 'react-state-reducer';
+ * import reduce from 'js-immutable';
  * const deepObject = {
  *  person: {
  *    name: 'robus gauli',
