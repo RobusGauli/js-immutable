@@ -1,5 +1,6 @@
 src
 test
+assets
 tsconfig.json
 .eslintrc
 .editorconfig
