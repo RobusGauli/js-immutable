@@ -1,4 +1,8 @@
+<p align="center">
+  <img src="https://github.com/sdgluck/mewt/blob/master/mewt.png" />
+</p>
 
+<p><h1 align="center">JS Immutable</h1></p>
 <a href="https://travis-ci.org/RobusGauli/react-state-reducer">
     <img src="https://travis-ci.org/RobusGauli/react-state-reducer.svg?branch=master" hspace="10px" align="right" vspace="2px">
 </a>
