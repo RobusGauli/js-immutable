@@ -114,7 +114,7 @@ const newState = complexReducer(state)
 const newState = complexReducer(state)
 	.of('#friends')
 	.pipe(friends => friends.concat('John'))
-	.of('#permanent)
+	.of('#permanent')
 	.pipe(value => value.toUpperCase())
 	.apply();
  ```
