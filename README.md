@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/sdgluck/mewt/blob/master/mewt.png" />
+  <img src="https://github.com/robusgauli/js-immutable/assets/logo.jpg" />
 </p>
 
 <p><h1 align="center">JS Immutable</h1></p>
