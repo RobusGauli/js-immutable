@@ -11,17 +11,16 @@
 Consider the scenario where you have to set a new value to <b>"temporary"</b> field without mutating original state.
 ```javascript
 const state = {
-  name: 'Safal',
-  age: 45,
-  friends: [],
   detail: {
-   	personal: {
-    	address: {
-				permanent: 'Kathmandu'
+    age: 30,
+    friends: ['Roshan'],
+    personal: {
+      address: {
+        permanent: 'Kathmandu'
       }
     }
   }
-}           
+}          
 ```
 Javascript way of setting a new value without modifying original state would be something like this: 
 
