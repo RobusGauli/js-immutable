@@ -18,7 +18,7 @@ const state = {
         personal: {
         fatherName: 'Kapil',
         address: {
-	        permanent: 'Kathmandu',
+	          permanent: 'Kathmandu',
             temporary: 'Pokhara'
         }
     }
