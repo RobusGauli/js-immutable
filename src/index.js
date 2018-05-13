@@ -1,5 +1,5 @@
 /**
- * React State Reducer
+ * Js Immutable
  *
  * Copyright © 2015-2016 Robus Gauli, LLC. All rights reserved.
  *
