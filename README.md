@@ -145,7 +145,7 @@ const friendsReducer = reduce(selector);
 
 const newState = friendsReducer(state)
 	.append('My new friend') // no need of "of('#')" since it is the default one.
-    .apply();
+  .apply();
 ```
 ```javascript
 // Example of multiple selector
@@ -162,7 +162,7 @@ const nextSelector = {
 const multipleReducer = reduce(nextSelector);
 
 const newState = multipleReducer(state)
-	.of('#name')
+	  .of('#name')
     .set('New Name')
     .of('#address')
     .merge({temporary: 'Pokhara'})
@@ -186,14 +186,14 @@ Helps to select the specific target so that it apply transformation to that targ
 const selector = {
 	task: {
     	done: '#done',
-        taskDetail: '#taskDetail'
+      taskDetail: '#taskDetail'
     }
 }
 
 const taskReducer = reduce(selector)
 
 const newState = taskReducer
-	.of('#done')
+    .of('#done')
     .set(true)
     .of('#taskDetail')
     .set('some new Detail')
