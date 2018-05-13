@@ -42,6 +42,8 @@ const newState = {
     }
   }
 } 
+
+Look at all the repetition! This is not only annoying, but also provides a large surface area for bugs.
 ```
 
 ### Problems with the above code:
@@ -53,7 +55,7 @@ const newState = {
 
 :pushpin: If structure of original state tree is modified, then every action reducer must be re-written. i.e Your reducer has an <b>dependency</b> on structure of redux state.
 
-### JS Immutable in Action
+### JS Immutable in Action 
 ```unix
 // Add as a dependency
 npm install js-immutable --save
@@ -112,7 +114,7 @@ const newState = complexReducer(state)
                 
  
  ### Benefits
- 
+ :pushpin: Structural Sharing out of Box. Performant!
  :pushpin: Your code is independent of the state tree and it's structure.
  
  :pushpin: You don't have to worry about mutation. Js-Immutable handles it for you.
@@ -122,74 +124,84 @@ const newState = complexReducer(state)
 :pushpin: It looks functional, clean, simple and easy to follow. It just makes life of your co-worker easier.
 
  
-## Usage
+## More on JS-Immutable
 
+#### Selector
 
-
-```javascript
-import reduce from 'js-immutable';
-```
+Selector are plain object that helps to select the fields on the state tree. Default selector value is '#'. The selector value must start with '#'. If your selector has multiple fields to select, Make sure they start with '#' and are unique.
 
 ```javascript
-// Sample State
-const originalState = {
-	detail: {
-		address: {
-			permanent: 'Kathmandu',
-		},
-		friends: ['robus', 'rahul', 'ishan'],
-		age: 24,
-		isOnline: false,
-		education: {
-			primary: 'blah',
-			secondary: 'blah blah'
-		}
-		
-	}
+// Example of Selector
+
+const selector = {
+	person: {
+    	friends: '#' // default
+    }
 }
+
+// Example of using the above selector
+
+const friendsReducer = reduce(selector);
+
+const newState = friendsReducer(state)
+	.append('My new friend') // no need of "of('#')" since it is the default one.
+    .apply();
 ```
 ```javascript
-// create a selector for address object
-const addressSelector = { 
-	detail: {
-		address: '#'
-	}
+// Example of multiple selector
+
+const nextSelector = {
+	name: '#name', // named selector (unique)
+    detail: {
+    	address: '#address' // named selector (unique)
+    }
 }
+
+// Example of using the above selector
+
+const multipleReducer = reduce(nextSelector);
+
+const newState = multipleReducer(state)
+	.of('#name')
+    .set('New Name')
+    .of('#address')
+    .merge({temporary: 'Pokhara'})
+    .apply();
 ```
+
+#### Available Methods
+<h4> 💧  set(value: any)</h4>Sets the new value to the target field.
+<h4> 💧  append(value: any)</h4>Appends new value on the target array.
+<h4> 💧  merge({key: value})</h4> Merge object on the target object.
+<h4> 💧  extend([]: any)</h4> Concatenate array on the target array
+<h4> 💧  delete(key: any)</h4> Delete a key on the target object or target array.
+
+### Utility Method
+<h4> 💧 Of(selectorName: any)</h4>
+
+Helps to select the specific target so that it apply transformation to that target in the object.
+
 ```javascript
-// React State Reducer in action.
-const addressReducer = reduce(addressSelector);
-
-const newState = addressReducer(addressSelector)
-	.merge({temporary: 'Pokhara'})
-	.apply();
-	
-```
-
-<img src="https://raw.githubusercontent.com/robb/Cartography/master/images/pirates1.png" align="right" height="200px"  hspace="30px" vspace="30px">
-
-## Result
-
-```javascript
-	console.log(newState);
-	// => {
-	detail: {
-		address: {
-			permanent: 'Kathmandu',
-			temporary: 'Pokhara' // merged //
-		},
-		friends: ['robus', 'rahul', 'ishan'],
-		age: 24,
-		isOnline: false,
-		education: {
-			primary: 'blah',
-			secondary: 'blah blah'
-		}
-		
-	}
+// if we have a multiple targets in a single selector
+const selector = {
+	task: {
+    	done: '#done',
+        taskDetail: '#taskDetail'
+    }
 }
+
+const taskReducer = reduce(selector)
+
+const newState = taskReducer
+	.of('#done')
+    .set(true)
+    .of('#taskDetail')
+    .set('some new Detail')
+    .apply();
 ```
 
+#### Note:
+If you think I have missed methods that is crucially important, then please send a Pull Request.
 
 ### License
 
