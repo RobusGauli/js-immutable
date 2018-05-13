@@ -72,6 +72,18 @@ function reduce(selector) {
       }
     }
 
+    function pipe(value, predicate) {
+      if (
+        value === null ||
+        value === undefined ||
+        typeof predicate !== 'function'
+      ) {
+        return value;
+      }
+
+      return predicate(value);
+    }
+
     function set(oldValue, newValue) {
       if (newValue === null || newValue === undefined) {
         return oldValue;
@@ -140,6 +152,7 @@ function reduce(selector) {
       merge,
       extend,
       delete: deleteOp,
+      pipe,
     };
 
     let toUpdate = {};
@@ -177,6 +190,7 @@ function reduce(selector) {
         this.delete = this.operationFactory('delete');
         this.append = this.operationFactory('append');
         this.extend = this.operationFactory('extend');
+        this.pipe = this.operationFactory('pipe');
       }
 
       of(target) {

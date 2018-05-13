@@ -283,5 +283,82 @@ describe('React State Reducer', () => {
         .deep
         .equal(['Robus', 'Ishan']);
     });
+
+    context('JS Immutable pipe method', () => {
+      let state = {
+        name: 'Robus',
+        age: 24,
+        friends: ['Ruby', 'King'],
+        address: {
+          permanent: 'Kathmandu',
+          temporary: 'Pokhara'
+        }
+      }
+      it('should return back the original state when the predicate to the pipe method is null', () => {
+        const selector = {
+          name: '#'
+        }
+        const reducer = reduce(selector)
+        const newState = reducer(state)
+          .pipe(null)
+          .apply();
+
+        expect(newState)
+          .deep.equal(state);
+      })
+
+      it('should return back the original state when predicate to the pipe method is undefined', () => {
+        const selector = {
+          name: '#'
+        }
+        const reducer = reduce(selector);
+        const newState = reducer(state)
+          .pipe(undefined)
+          .apply();
+        expect(newState)
+          .deep
+          .equal(state);
+      })
+
+      it('should return back the original state when predicate to the pipe method is not a function', () => {
+        const selector = {
+          ages: '#'
+        }
+
+        const reducer = reduce(selector);
+        const newState = reducer(state)
+          .pipe('Random String')
+          .apply();
+        expect(newState)
+          .deep
+          .equal(state);
+      });
+
+      it('should return list of keys when predicate to the method applies the following transformation', () => {
+        const selector = {
+          address: '#'
+        };
+
+        const reducer = reduce(selector);
+        const newState = reducer(state)
+          .pipe(object => Object.keys(object))
+          .apply()
+
+        expect(newState.address)
+          .to.deep.equal(['permanent', 'temporary'])
+      })
+
+      it('should return new value to the name when predicate to the method applies following transformation', () => {
+        const selector = {
+          name: '#'
+        };
+        const reducer = reduce(selector);
+        const newState = reducer(state)
+          .pipe(value => value.toUpperCase())
+          .apply()
+        expect(newState.name)
+          .to.equal(state.name.toUpperCase())
+      })
+    })
   });
 });
