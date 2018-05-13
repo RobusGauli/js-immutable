@@ -134,27 +134,26 @@ Selector are plain object that helps to select the fields on the state tree. Def
 // Example of Selector
 
 const selector = {
-	person: {
-    	friends: '#' // default
-    }
+  person: {
+    friends: '#' // default
+  }
 }
-
 // Example of using the above selector
 
 const friendsReducer = reduce(selector);
 
 const newState = friendsReducer(state)
-	.append('My new friend') // no need of "of('#')" since it is the default one.
+  .append('My new friend') // no need of "of('#')" since it is the default one.
   .apply();
 ```
 ```javascript
 // Example of multiple selector
 
 const nextSelector = {
-	name: '#name', // named selector (unique)
-    detail: {
-    	address: '#address' // named selector (unique)
-    }
+  name: '#name', // named selector (unique)
+  detail: {
+    address: '#address' // named selector (unique)
+  }
 }
 
 // Example of using the above selector
@@ -184,12 +183,11 @@ Helps to select the specific target so that it apply transformation to that targ
 ```javascript
 // if we have a multiple targets in a single selector
 const selector = {
-	task: {
-    	done: '#done',
-      taskDetail: '#taskDetail'
-    }
+  task: {
+    done: '#done',
+    taskDetail: '#taskDetail'
+  }
 }
-
 const taskReducer = reduce(selector)
 
 const newState = taskReducer
