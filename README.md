@@ -9,7 +9,7 @@
 
 ## Motivation 🐬🐬
 Consider the scenario where you have to set a new value to <b>"temporary"</b> field without mutating original state.
-```javacript
+```javascript
 const state = {
    name: 'Safal',
    age: 45,
@@ -55,7 +55,7 @@ const newState = {
 :pushpin: If structure of original state tree is modified, then every action reducer must be re-written. i.e Your reducer has an <b>dependency</b> on structure of redux state.
 
 ### JS Immutable in Action
-```unix
+```shell
 // Add as a dependency
 npm install js-immutable --save
 ```
@@ -81,7 +81,7 @@ const addressReducer = reduce({
 // No dependency to the state structure while returning new state
 
 const newState = addressReducer(state)
-					.set('New Random Location')
+					          .set('New Random Location')
                     .apply();
 ```
 A more complex scenario where we need to append new friend to the friends list and set new value to permanent address.
@@ -101,7 +101,7 @@ const complexReducer = reduce({
 
 // Clean and elegant 
 const newState = complexReducer(state)
-					.of('#friends') // using friends selector and appending
+					          .of('#friends') // using friends selector and appending
                     .append('John')  
                     .of('#permanent') // using permanent selector and setting
                     .set("New Value') 
@@ -161,8 +161,8 @@ const addressSelector = {
 const addressReducer = reduce(addressSelector);
 
 const newState = addressReducer(addressSelector)
-	.merge({temporary: 'Pokhara'})
-	.apply();
+	                .merge({temporary: 'Pokhara'})
+	                .apply();
 	
 ```
 
