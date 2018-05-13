@@ -107,7 +107,16 @@ const newState = complexReducer(state)
   .append('John')
   .of('#permanent') // using permanent selector and setting
   .set('New Value')
-  .apply();
+	.apply();
+
+// or you can simply pipe it through predicate
+
+const newState = complexReducer(state)
+	.of('#friends')
+	.pipe(friends => friends.concat('John'))
+	.of('#permanent)
+	.pipe(value => value.toUpperCase())
+	.apply();
  ```
 ### Note
  ###### '#' is the default selector. You don't need to use "of("some selector")' when you use '#' as a selector.
@@ -174,6 +183,7 @@ const newState = multipleReducer(state)
 <h4> 💧  merge({key: value})</h4> Merge object on the target object.
 <h4> 💧  extend([]: any)</h4> Concatenate array on the target array
 <h4> 💧  delete(key: any)</h4> Delete a key on the target object or target array.
+<h4> 💧  pipe(predicate: function)</h4> Applies a function/predicate to the target value.
 
 ### Utility Method
 <h4> 💧 Of(selectorName: any)</h4>
