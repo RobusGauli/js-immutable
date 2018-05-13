@@ -15,12 +15,11 @@ const state = {
   age: 45,
   friends: [],
   detail: {
-   	personal: {
-      fatherName: 'Kapil',
-    	address: {
+    personal: {
+      address: {
 				permanent: 'Kathmandu',
         temporary: 'Pokhara'
-      },
+      }
     }
   }
 }           
