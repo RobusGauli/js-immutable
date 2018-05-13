@@ -17,7 +17,6 @@ const state = {
   detail: {
    	personal: {
     	address: {
-        temporary: 'Pokhara',
 				permanent: 'Kathmandu'
       }
     }
