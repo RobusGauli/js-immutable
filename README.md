@@ -161,11 +161,11 @@ const nextSelector = {
 const multipleReducer = reduce(nextSelector);
 
 const newState = multipleReducer(state)
-	  .of('#name')
-    .set('New Name')
-    .of('#address')
-    .merge({temporary: 'Pokhara'})
-    .apply();
+	.of('#name')
+	.set('New Name')
+	.of('#address')
+	.merge({temporary: 'Pokhara'})
+	.apply();
 ```
 
 #### Available Methods
@@ -191,11 +191,11 @@ const selector = {
 const taskReducer = reduce(selector)
 
 const newState = taskReducer
-    .of('#done')
-    .set(true)
-    .of('#taskDetail')
-    .set('some new Detail')
-    .apply();
+	.of('#done')
+	.set(true)
+	.of('#taskDetail')
+	.set('some new Detail')
+	.apply();
 ```
 
 #### Note:
