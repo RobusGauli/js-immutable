@@ -107,7 +107,7 @@ const newState = complexReducer(state)
   .append('John')
   .of('#permanent') // using permanent selector and setting
   .set('New Value')
-	.apply();
+  .apply();
 
 // or you can simply pipe it through predicate
 
