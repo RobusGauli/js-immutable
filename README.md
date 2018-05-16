@@ -3,8 +3,8 @@
 </p>
 
 
-<a href="https://travis-ci.org/RobusGauli/react-state-reducer">
-    <img src="https://travis-ci.org/RobusGauli/react-state-reducer.svg?branch=master" hspace="10px" align="right" vspace="2px">
+<a href="https://travis-ci.org/RobusGauli/js-immutable">
+    <img src="https://travis-ci.org/RobusGauli/js-immutable.svg?branch=master" hspace="10px" align="right" vspace="2px">
 </a>
 
 ## Motivation 🐬🐬
