@@ -17,7 +17,7 @@ const state = {
     personal: {
       address: {
         permanent: 'Kathmandu',
-        temporary; 'Pokhara'
+        temporary: 'Pokhara'
       },
       spouse: 'Nancy'
     }
