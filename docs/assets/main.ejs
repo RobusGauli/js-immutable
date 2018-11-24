@@ -1,0 +1,29 @@
+<!doctype html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title><%= title %></title>
+    <meta name="description" content="<%= description %>">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.indigo-pink.min.css">
+    <link rel="stylesheet" href="<%= base %>/main.css">
+    <script src="https://code.getmdl.io/1.1.3/material.min.js" defer></script>
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout layout">
+      <%- include('header'); %>
+      <main class="mdl-layout__content">
+        <div class="content">
+          <%- content %>
+        </div>
+      </main>
+    </div>
+    <script>
+      window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+      ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+    </script>
+    <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+  </body>
+</html>

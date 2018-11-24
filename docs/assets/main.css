@@ -1,0 +1,16 @@
+/**
+ * Core and layout styles
+ */
+
+@import 'header.css';
+
+.content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 1024px) {
+  .content {
+    padding: 16px;
+  }
+}

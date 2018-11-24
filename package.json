@@ -24,6 +24,7 @@
     "parser": "babel-eslint",
     "extends": "airbnb-base"
   },
+  "dependencies": {},
   "devDependencies": {
     "babel-runtime": "^6.11.6",
     "babel-cli": "^6.16.0",

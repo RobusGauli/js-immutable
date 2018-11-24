@@ -1,0 +1,8 @@
+/**
+ * Header styles
+ */
+
+.mdl-layout__header {
+  background: url(http://getmdl.io/assets/demos/transparent.jpg) center / cover;
+  min-height: 600px;
+}
