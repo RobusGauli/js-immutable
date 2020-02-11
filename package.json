@@ -38,7 +38,7 @@
     "coveralls": "^2.11.14",
     "del": "^2.2.2",
     "easystatic": "^0.1.12",
-    "eslint": "^3.8.0",
+    "eslint": "^4.18.2",
     "eslint-config-airbnb-base": "^10.0.1",
     "eslint-plugin-import": "^2.2.0",
     "istanbul": "^1.1.0-alpha.1",
